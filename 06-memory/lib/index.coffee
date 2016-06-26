@@ -7,14 +7,16 @@ exports.countryCounter = (countryCode, cb) ->
   fs.readFile "#{__dirname}/../data/geo.txt", 'utf8', (err, data) ->
     if err then return cb err
 
-    data = data.toString().split '\n'
+    countryCodePattern = ///  #begining of line
+      (#{countryCode})+       #concatinate the exact country code
+      ///gm                   #end of line with global multiline flags
+    
+    data = data.match countryCodePattern    
+#    data = data.match /([A-Z]{2})+/gm 
+
     counter = 0
 
     for line in data when line
-      line = line.split '\t'
-      # GEO_FIELD_MIN, GEO_FIELD_MAX, GEO_FIELD_COUNTRY
-      # line[0],       line[1],       line[3]
-
-      if line[3] == countryCode then counter++
-
+      if line == countryCode then counter++
+    
     cb null, counter

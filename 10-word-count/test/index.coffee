@@ -40,3 +40,19 @@ describe '10-word-count', ->
   # !!!!!
   # Make the above tests pass and add more tests!
   # !!!!!
+
+  it.skip 'should count camel cased words as multiple words', (done) ->
+    input = 'FunPuzzle'
+    expected = words: 2, lines: 1
+    helper input, expected, done
+    
+  it.skip 'should count total number of lines', (done) ->
+    input = null
+    expected = words: 2, lines: 1
+    helper input, expected, done
+    
+    
+  it.skip 'should count characters and bytes', (done) ->
+    input = null
+    expected = words: 2, lines: 1
+    helper input, expected, done
